@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import "./App.css"; // Importing the CSS file for styling
 
 const TapRush = () => {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(30);
   const [targetVisible, setTargetVisible] = useState(false);
   const [targetPosition, setTargetPosition] = useState({ x: 50, y: 50 });
+  const [difficulty, setDifficulty] = useState("Easy");
+  const [targetDisplayTime, setTargetDisplayTime] = useState(3000);
 
   useEffect(() => {
     if (timeLeft > 0) {
@@ -16,20 +19,20 @@ const TapRush = () => {
   useEffect(() => {
     if (timeLeft > 0) {
       const showTarget = setTimeout(() => {
-        setTargetVisible(true);
         setTargetPosition({
-          x: Math.random() * 40 + 30, // Ensuring it stays more centered
-          y: Math.random() * 40 + 30,
+          x: Math.random() * 80 + 10, // Spread position more evenly
+          y: Math.random() * 80 + 10,
         });
-      }, Math.random() * 1500 + 800); // Make it easier by increasing appearance time
+        setTargetVisible(true);
+      }, Math.random() * 1000 + 500); // Appear faster
 
-      const hideTarget = setTimeout(() => setTargetVisible(false), 1200); // Increase visibility duration
+      const hideTarget = setTimeout(() => setTargetVisible(false), targetDisplayTime); // Adjust visibility time based on difficulty
       return () => {
         clearTimeout(showTarget);
         clearTimeout(hideTarget);
       };
     }
-  }, [timeLeft, score]);
+  }, [timeLeft, score, targetDisplayTime]);
 
   const handleTap = () => {
     if (targetVisible) {
@@ -38,18 +41,47 @@ const TapRush = () => {
     }
   };
 
+  const handleDifficultyChange = (level) => {
+    setDifficulty(level);
+    if (level === "Easy") {
+      setTargetDisplayTime(3000);
+    } else if (level === "Challenging") {
+      setTargetDisplayTime(2000);
+    } else if (level === "Insane Mode") {
+      setTargetDisplayTime(1000);
+    }
+    // Reset the game when difficulty is changed
+    setScore(0);
+    setTimeLeft(30);
+    setTargetVisible(false);
+  };
+
   return (
     <div className="game-container">
-      <h1>Tap Rush</h1>
-      <p>Time Left: {timeLeft}s</p>
-      <p>Score: {score}</p>
-      <div className="game-area" onClick={handleTap}>
-        {targetVisible && (
-          <div
-            className="target"
-            style={{ left: `${targetPosition.x}%`, top: `${targetPosition.y}%` }}
-          ></div>
-        )}
+      <div className="game-box">
+        <h1 className="game-title animated-title">Tap Rush</h1>
+        <p className="game-info">Time Left: {timeLeft}s</p>
+        <p className="game-info">Score: {score}</p>
+        <div className="difficulty-buttons">
+          <button className="difficulty-button easy" onClick={() => handleDifficultyChange("Easy")}>
+            Easy
+          </button>
+          <button className="difficulty-button challenging" onClick={() => handleDifficultyChange("Challenging")}>
+            Challenging
+          </button>
+          <button className="difficulty-button insane" onClick={() => handleDifficultyChange("Insane Mode")}>
+            Insane Mode
+          </button>
+        </div>
+        <p className="game-info">Current Difficulty: {difficulty}</p>
+        <div className="game-area" onClick={handleTap}>
+          {targetVisible && (
+            <div
+              className="target animated-target"
+              style={{ left: `${targetPosition.x}%`, top: `${targetPosition.y}%` }}
+            ></div>
+          )}
+        </div>
       </div>
     </div>
   );
