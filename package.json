@@ -1,6 +1,6 @@
 {
-  "name": "tap-rush-game",
-  "homepage": "https://your-username.github.io/tap-rush-game",
+  "name": "joy-junction",
+  "homepage": "https://attyuttam.github.io/joy-junction",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
