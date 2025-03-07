@@ -71,20 +71,20 @@ const TapRush = () => {
           <button
             className="difficulty-button easy"
             onClick={() => {
-              setDifficulty(3000);
-              resetDifficulty();
-            }}
-          >
-            🟢 Chill Mode (3s)
-          </button>
-          <button
-            className="difficulty-button challenging"
-            onClick={() => {
               setDifficulty(2000);
               resetDifficulty();
             }}
           >
-            🟠 Fast Reflexes (2s)
+            🟢 Chill Mode (2s)
+          </button>
+          <button
+            className="difficulty-button challenging"
+            onClick={() => {
+              setDifficulty(1500);
+              resetDifficulty();
+            }}
+          >
+            🟠 Fast Reflexes (1.5s)
           </button>
           <button
             className="difficulty-button insane"

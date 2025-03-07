@@ -19,8 +19,9 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/joy-junction" element={<Home />} />
-        <Route path="/tap-rush" element={<TapRush />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/joy-junction" element={<Home />} />
+          <Route path="/tap-rush" element={<TapRush />} />
       </Routes>
     </Router>
   );
