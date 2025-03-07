@@ -18,12 +18,12 @@ const TapRush = () => {
       const showTarget = setTimeout(() => {
         setTargetVisible(true);
         setTargetPosition({
-          x: Math.random() * 90 + 5,
-          y: Math.random() * 90 + 5,
+          x: Math.random() * 40 + 30, // Ensuring it stays more centered
+          y: Math.random() * 40 + 30,
         });
-      }, Math.random() * 1000 + 500);
+      }, Math.random() * 1500 + 800); // Make it easier by increasing appearance time
 
-      const hideTarget = setTimeout(() => setTargetVisible(false), 700);
+      const hideTarget = setTimeout(() => setTargetVisible(false), 1200); // Increase visibility duration
       return () => {
         clearTimeout(showTarget);
         clearTimeout(hideTarget);
